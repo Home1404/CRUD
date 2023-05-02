@@ -8,4 +8,4 @@ Apoyame para Seguir Programando 👍
 
 🍔 ¿Me invítas una Hamburguesa? **[Click Aqui](https://www.paypal.com/paypalme/JesusHome1404)**
 
-![Banda](/Img/Banda.jpg)
+![Banda](/img/Banda.jpg)

@@ -1,6 +1,8 @@
 # Codido Completo de la Base de Datos
 !Importante: Crear base de Datos en Xampp
 
+Metodologia PDO
+
 $ Base de Datos
 CREATE DATABASE crud_php;
 
