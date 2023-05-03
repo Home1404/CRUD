@@ -20,11 +20,20 @@
       }
 
       // ? Ni idea del Error
-     $stmt -> close();
+    //  $stmt -> close();
      $stmt = null;
-
-      #bindparam()
-      // :user_ Parametros ocultos
+     
+     #bindparam()
+     // :user_ Parametros ocultos
+    }
+    // $ Seleccionar Registros
+    static public function mdlSeleccionarRegistros($tabla){
+      $stmt = Conexion::conectar() -> prepare("SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla ORDER BY user_id DESC ");
+      $stmt -> execute();
+      return $stmt -> fetchAll();
+      
+      // $stmt -> close();
+      $stmt = null;
     }
   }
 

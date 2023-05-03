@@ -1,5 +1,6 @@
 <?php
 
+// $ Registros
 class ControladorFormularios{
   static public function ctrRegistro(){
     if (isset($_POST["registroNombre"])) {
@@ -13,5 +14,11 @@ class ControladorFormularios{
       $respuesta = ModeloFormularios::mdlRegistro($tabla,$datos);
       return $respuesta;
     }
+  }
+  // $ Seleccionar Registros
+  static public function ctrSeleccionarRegistros(){
+    $tabla = "registros";
+    $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla);
+    return $respuesta;
   }
 }
