@@ -1,3 +1,8 @@
+<!-- Variables de Sesion -->
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -85,6 +90,7 @@
             $_GET["pagina"] == "registro" || 
             $_GET["pagina"] == "ingreso" || 
             $_GET["pagina"] == "inicio" ||
+            $_GET["pagina"] == "editar" ||
             $_GET["pagina"] == "salir" 
             ) {
               include "pages/" . $_GET["pagina"] . ".php";

@@ -4,21 +4,21 @@
 class ControladorFormularios{
   static public function ctrRegistro(){
     if (isset($_POST["registroNombre"])) {
-      // return $_POST["registroNombre"] . "<br>". $_POST["registroEmail"] . "<br>" . $_POST["registroPassword"];
-      // return "ok";
       $tabla = "registros";
+      
       $datos = array("user_name" => $_POST["registroNombre"],
                     "user_email" => $_POST["registroEmail"],
                     "user_password" => $_POST["registroPassword"]
                   );
+
       $respuesta = ModeloFormularios::mdlRegistro($tabla,$datos);
       return $respuesta;
     }
   }
   // $ Seleccionar Registros
-  static public function ctrSeleccionarRegistros(){
+  static public function ctrSeleccionarRegistros($item, $valor){
     $tabla = "registros";
-    $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, null, null);
+    $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
     return $respuesta;
   }
   // $ Ingreso
@@ -27,9 +27,26 @@ class ControladorFormularios{
       $tabla = "registros";
       $item = "user_email";
       $valor = $_POST["ingresoEmail"];
+      
       $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
+      
       if ($respuesta["user_email"] == $_POST["ingresoEmail"] && $respuesta["user_password"] == $_POST["ingresoPassword"]) {
-        echo '<pre>'; print_r($respuesta); echo '</pre>';
+        // Variables de Sesion
+        $_SESSION["validarIngreso"] = "ok";
+        
+        echo '<script>
+        if(window.history.replaceState){
+          window.history.replaceState(null,null, window.location.href)
+        }
+        window.location = "index.php?pagina=inicio";
+        </script>';
+      } else {
+        echo '<script>
+        if(window.history.replaceState){
+          window.history.replaceState(null,null, window.location.href)
+        }
+        </script>';
+        echo '<div class="alert alert-danger">Error al ingresar al sistema, el email o la contraseña no coinciden</div>';
       }
     }
   }

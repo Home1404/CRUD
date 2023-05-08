@@ -1,4 +1,15 @@
 <?php 
+  // Variables de Sesion
+  if (!isset($_SESSION["validarIngreso"])) {
+    echo '<script>window.location = "index.php?pagina=ingreso";</script>';
+    return;
+  } else {
+    if ($_SESSION["validarIngreso"] != "ok") {
+      echo '<script>window.location = "index.php?pagina=ingreso";</script>';
+      return;
+    }
+  }
+  
   $usuarios = ControladorFormularios::ctrSeleccionarRegistros();
 ?>
 
@@ -29,9 +40,9 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-warning">
+            <a href="index.php?pagina=editar&id=<?php echo $value["user_id"] ?>" class="btn btn-warning">
               <i class="fa-solid fa-pencil"></i>
-            </button>
+            </a>
             <button class="btn btn-danger">
               <i class="fa-solid fa-trash"></i>
             </button>
