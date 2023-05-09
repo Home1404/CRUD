@@ -10,7 +10,7 @@
     }
   }
   
-  $usuarios = ControladorFormularios::ctrSeleccionarRegistros();
+  $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null); 
 ?>
 
 <table class="table table-striped">
@@ -40,12 +40,26 @@
         </td>
         <td>
           <div class="btn-group">
-            <a href="index.php?pagina=editar&id=<?php echo $value["user_id"] ?>" class="btn btn-warning">
-              <i class="fa-solid fa-pencil"></i>
-            </a>
-            <button class="btn btn-danger">
-              <i class="fa-solid fa-trash"></i>
-            </button>
+            <div class="px-1">
+              <a href="index.php?pagina=editar&id=<?php echo $value["user_id"] ?>" class="btn btn-warning">
+                <i class="fa-solid fa-pencil"></i>
+              </a>
+            </div>
+              <form method="post" autocomplete="off">
+                <input type="hidden" value="<?php echo $value["user_id"] ?>" name="eliminarRegistro">
+               
+                <button type="submit" class="btn btn-danger">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <?php
+
+                  $eliminar = new ControladorFormularios();
+                  $eliminar -> ctrEliminarRegistro();
+
+                ?>
+
+              </form>
           </div>
         </td>
       </tr>

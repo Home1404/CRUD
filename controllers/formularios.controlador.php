@@ -6,11 +6,12 @@ class ControladorFormularios{
     if (isset($_POST["registroNombre"])) {
       $tabla = "registros";
       
-      $datos = array("user_name" => $_POST["registroNombre"],
+      $datos = array(
+                    "user_name" => $_POST["registroNombre"],
                     "user_email" => $_POST["registroEmail"],
                     "user_password" => $_POST["registroPassword"]
                   );
-
+      
       $respuesta = ModeloFormularios::mdlRegistro($tabla,$datos);
       return $respuesta;
     }
@@ -47,6 +48,44 @@ class ControladorFormularios{
         }
         </script>';
         echo '<div class="alert alert-danger">Error al ingresar al sistema, el email o la contraseña no coinciden</div>';
+      }
+    }
+  }
+  // $ Actualizar
+  static public function ctrActualizarRegistro(){
+    if (isset($_POST["actualizarNombre"])) {
+      if (($_POST["actualizarPassword"] != "")) {
+        $password = $_POST["actualizarPassword"];
+      } else {
+        $password = $_POST["passwordActual"];
+      }
+      $tabla = "registros";
+      
+      $datos = array(
+        "user_id" => $_POST["idUsuario"],
+        "user_name" => $_POST["actualizarNombre"],
+        "user_email" => $_POST["actualizarEmail"],
+        "user_password" => $password
+      );
+    
+      $respuesta = ModeloFormularios::mdlActualizarRegistro($tabla,$datos);
+      
+      return $respuesta;
+    }
+  }
+  // $ Eliminar
+  public function ctrEliminarRegistro(){
+    if (isset($_POST["eliminarRegistro"])) {
+      $tabla = "registros";
+      $valor = $_POST["eliminarRegistro"];
+      $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla,$valor);
+      if ($respuesta == "ok") {
+        echo '<script>
+        if(window.history.replaceState){
+          window.history.replaceState(null,null, window.location.href)
+        }
+        window.location = "index.php?pagina=inicio";
+        </script>';
       }
     }
   }
